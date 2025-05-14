@@ -59,7 +59,19 @@ ___
 ```
 ___
 
-    
+## Android Manifest ဖိုင်ထဲမှာ permission ရယ် meta data ရယ်ထည့်မယ်
+
+```
+    <!-- For apps targeting Android 13 or higher & GMA SDK version 20.3.0 or lower -->
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+    <application android:name=".MyApp">
+     <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/admobId" />
+    </application>
+
+```
+___
 
 
 
