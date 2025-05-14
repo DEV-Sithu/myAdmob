@@ -73,7 +73,7 @@ ___
 ```
 ___
 
-## App Open Ads အတွက် လုပ်ဆောင်ရဲ့အချက် Code snippets များ [Link](AppOpenAds.md "AppOpenAds အကြောင်း")
+## App Open Ads အတွက် လုပ်ဆောင်ရဲ့အချက် Code snippets များ      [ ဒီမှာဖတ်ပါ ](AppOpenAds.md "AppOpenAds အကြောင်း")
 
  
 
