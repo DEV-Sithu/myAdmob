@@ -197,7 +197,11 @@ class MyApp : Application(), Application.ActivityLifecycleCallbacks {
     }
 }
 ```
-
+#### Myapp ကို application ကနေပြန်ခေါပေးရင်ရပီ
+```
+<application
+        android:name=".MyApp"/>
+```
 ***
 
 
