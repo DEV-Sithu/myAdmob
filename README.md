@@ -4,7 +4,7 @@
 #### androidသမာတွေအတွက် Test လုပ်ရင် အသုံးပြုရမဲ့ ads unitidတွေပါ
 
 * App Open	
-ca-app-pub-3940256099942544/9257395921
+> > ca-app-pub-3940256099942544/9257395921
 
 * Adaptive Banner	
 ca-app-pub-3940256099942544/9214589741
