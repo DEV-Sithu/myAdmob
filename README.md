@@ -73,9 +73,7 @@ ___
 ```
 ___
 
-[Link](AppOpenAds.md "AppOpenAds File")
-[Link reference][1]
+## App Open Ads အတွက် လုပ်ဆောင်ရဲ့အချက် Code snippets များ [Link](AppOpenAds.md "AppOpenAds အကြောင်း")
 
-[1]: AppOpenAds.md "AppOpenAds"
  
 
