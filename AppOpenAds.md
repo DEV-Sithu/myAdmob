@@ -205,3 +205,106 @@ class MyApp : Application(), Application.ActivityLifecycleCallbacks {
 ***
 
 
+##### တကယ်လို့ splash screen ကို activityတစ်ခုအနေနဲ့ထားမယ်ဆိုရင် open ads နဲ့မညိအောင်ရေးနည်း
+အောက်ပါ Kotlin code သည် Androidx Core SplashScreen library နှင့် AdMob App Open Ads ကို ပေါင်းစပ်အသုံးပြုနည်းကို ဥပမာပြထားပါသည်။ Policy နှင့်လိုက်နာပြီး အသုံးပြုသူအတွေ့အကြုံကို ဦးစားပေးထားသော နမူနာဖြစ်ပါသည်။
+
+```
+import android.content.Intent
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.google.android.gms.ads.AdError
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.appopen.AppOpenAd
+
+class SplashActivity : ComponentActivity() {
+
+    private var appOpenAd: AppOpenAd? = null
+    private val AD_UNIT_ID = "ca-app-pub-3940256099942544/3419835294" // Test Ad Unit ID
+    private val AD_TIMEOUT = 5000L // 5 seconds
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
+        super.onCreate(savedInstanceState)
+
+        // Splash Screen ကို အနည်းဆုံး 1စက္ကန့်ပြပါ
+        splashScreen.setKeepOnScreenCondition { true }
+
+        loadAppOpenAd()
+    }
+
+    private fun loadAppOpenAd() {
+        val loadCallback = object : AppOpenAd.AppOpenAdLoadCallback() {
+            override fun onAdLoaded(ad: AppOpenAd) {
+                appOpenAd = ad
+                showAppOpenAd()
+            }
+
+            override fun onAdFailedToLoad(error: LoadAdError) {
+                goToMainActivity()
+            }
+        }
+
+        // App Open Ad ကို စတင် Load လုပ်ပါ
+        AppOpenAd.load(
+            this,
+            AD_UNIT_ID,
+            AdRequest.Builder().build(),
+            AppOpenAd.APP_OPEN_AD_ORIENTATION_PORTRAIT,
+            loadCallback
+        )
+
+        // Timeout သတ်မှတ်ပါ (5စက္ကန့်ကျော်ပါက Main Activity သို့သွားပါ)
+        handler.postDelayed({ goToMainActivity() }, AD_TIMEOUT)
+    }
+
+    private fun showAppOpenAd() {
+        appOpenAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
+            override fun onAdDismissedFullScreenContent() {
+                goToMainActivity()
+                appOpenAd = null
+            }
+
+            override fun onAdFailedToShowFullScreenContent(error: AdError) {
+                goToMainActivity()
+                appOpenAd = null
+            }
+        }
+
+        appOpenAd?.show(this)
+    }
+
+    private fun goToMainActivity() {
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
+    }
+}
+```
+
+##### MyApplication.kt (App Open Ad ကို App Lifecycle နှင့်ချိတ်ပါ)
+
+```
+import android.app.Application
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.ProcessLifecycleOwner
+
+class MyApplication : Application(), LifecycleObserver {
+
+    override fun onCreate() {
+        super.onCreate()
+        ProcessLifecycleOwner.get().lifecycle.addObserver(this)
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    private fun onAppForegrounded() {
+        // App နောက်ခံမှ ပြန်လာချိန်တွင် App Open Ad ပြပါ
+        // (SplashActivity တွင်ဖွင့်ထားပါက မပြပါ)
+    }
+}
+```
+
+
