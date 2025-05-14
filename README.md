@@ -73,6 +73,9 @@ ___
 ```
 ___
 
+##### Invalid Traffic ဆိုတာဘာလဲ အသေးစိတ်ဖတ်နိုင်ပါတယ်   [ ဒီမှာဖတ်ပါ ](InvalidTraffic.md "InvalidTraffic အကြောင်း")
+___
+
 ##### App Open Ads အတွက် လုပ်ဆောင်ရမည့်အချက်များ Code snippets များ   [ ဒီမှာဖတ်ပါ ](AppOpenAds.md "AppOpenAds အကြောင်း")
 
 ##### Adaptive Banner Ads အတွက် လုပ်ဆောင်ရမည့်အချက်များ Code snippets များ   [ ဒီမှာဖတ်ပါ ](AdaptiveBannerAds.md "AdaptiveBannerAds အကြောင်း")
