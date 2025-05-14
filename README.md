@@ -49,6 +49,17 @@ ___
 
 ___
 
+## build.gradle မှာ ads lib လိုအပ်တာလေးတွေ  implement လုပ်မယ်
+
+```
+    //  ads
+    implementation("com.google.android.gms:play-services-ads:22.6.0")
+    // open ads lifecycle
+    implementation("androidx.lifecycle:lifecycle-process:2.9.0")
+```
+___
+
+    
 
 
 
