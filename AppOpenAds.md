@@ -45,7 +45,10 @@
 
 <br>
 
-#### AdMob AppOpen Ads ကို Policy မထိခိုက်စေဘဲ မှန်ကန်စွာ ရေးသားနည်း
+___
+
+# AdMob AppOpen Ads ကို Policy မထိခိုက်စေဘဲ မှန်ကန်စွာ ရေးသားနည်း
+
 <p>AdMob AppOpen Ads ကို မှန်ကန်စွာ အကောင်အထည်ဖော်ရန် Google ၏ လမ်းညွှန်ချက်များ နှင့် အသုံးပြုသူအတွေ့အကြုံ (UX) ကို အထူးဂရုပြုရပါမည်။ အောက်ပါအချက်များကို လိုက်နာခြင်းဖြင့် Policy ချိုးဖောက်မှုမှ ရှောင်ရှားနိုင်ပါသည်။</p>
 
 
@@ -85,3 +88,116 @@
    ပြဿနာကို ပြင်ဆင်ပြီးပါက AdMob Policy Center မှတဆင့် ပြန်လည်သုံးသပ်မှုတောင်းပါ။ ပြင်ဆင်ချက်များကို အသေးစိတ်ရှင်းပြပါ (ဥပမာ - Splash Screen နှင့် Ad 
    Loading အဆင့်ကို ပြင်ထားကြောင်း)
 <br>
+
+___
+
+## Code Snippet
+
+```
+
+import android.app.Activity
+import android.app.Application
+import android.content.Context
+import android.os.Bundle
+import android.util.Log
+import com.google.android.gms.ads.AdError
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.appopen.AppOpenAd
+
+
+class MyApp : Application(), Application.ActivityLifecycleCallbacks {
+
+    private var currentActivity: Activity? = null
+    private var appOpenAdManager: AppOpenAdManager? = null
+
+    override fun onCreate() {
+        super.onCreate()
+        MobileAds.initialize(this)
+        registerActivityLifecycleCallbacks(this)
+
+        appOpenAdManager = AppOpenAdManager()
+    }
+
+    override fun onActivityStarted(activity: Activity) {
+        currentActivity = activity
+        appOpenAdManager?.showAdIfAvailable(activity)
+    }
+
+    override fun onActivityResumed(activity: Activity) {
+        currentActivity = activity
+    }
+
+    // Other lifecycle methods...
+    override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {}
+    override fun onActivityPaused(activity: Activity) {}
+    override fun onActivityStopped(activity: Activity) {}
+    override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
+    override fun onActivityDestroyed(activity: Activity) {}
+
+    inner class AppOpenAdManager {
+        private var appOpenAd: AppOpenAd? = null
+        private var isLoadingAd = false
+        private var isShowingAd = false
+        private var loadTime: Long = 0
+
+        fun showAdIfAvailable(activity: Activity) {
+            if (isShowingAd) return
+            if (isAdAvailable()) {
+                appOpenAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
+                    override fun onAdShowedFullScreenContent() {
+                        isShowingAd = true
+                    }
+
+                    override fun onAdDismissedFullScreenContent() {
+                        appOpenAd = null
+                        isShowingAd = false
+                        loadAd(activity)
+                    }
+
+                    override fun onAdFailedToShowFullScreenContent(adError: AdError) {
+                        isShowingAd = false
+                    }
+                }
+                appOpenAd?.show(activity)
+            } else {
+                loadAd(activity)
+            }
+        }
+
+        private fun loadAd(context: Context) {
+            if (isLoadingAd || isAdAvailable()) return
+
+            isLoadingAd = true
+            val request = AdRequest.Builder().build()
+            AppOpenAd.load(
+                context,
+                context.getString(R.string.open_ads), // Test Ad Unit ID
+                request,
+                AppOpenAd.APP_OPEN_AD_ORIENTATION_PORTRAIT,
+                object : AppOpenAd.AppOpenAdLoadCallback() {
+                    override fun onAdLoaded(ad: AppOpenAd) {
+                        appOpenAd = ad
+                        isLoadingAd = false
+                        loadTime = System.currentTimeMillis()
+                    }
+
+                    override fun onAdFailedToLoad(adError: LoadAdError) {
+                        isLoadingAd = false
+                    }
+                }
+            )
+        }
+
+        private fun isAdAvailable(): Boolean {
+            return appOpenAd != null && (System.currentTimeMillis() - loadTime < 4 * 60 * 60 * 1000)
+        }
+    }
+}
+```
+
+***
+
+
