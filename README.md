@@ -73,7 +73,18 @@ ___
 ```
 ___
 
-## App Open Ads အတွက် လုပ်ဆောင်ရဲ့အချက် Code snippets များ      [ ဒီမှာဖတ်ပါ ](AppOpenAds.md "AppOpenAds အကြောင်း")
+## App Open Ads အတွက် လုပ်ဆောင်ရမည့်အချက်များ Code snippets များ   [ ဒီမှာဖတ်ပါ ](AppOpenAds.md "AppOpenAds အကြောင်း")
 
- 
+## Adaptive Banner Ads အတွက် လုပ်ဆောင်ရမည့်အချက်များ Code snippets များ   [ ဒီမှာဖတ်ပါ ](AdaptiveBannerAds.md "AdaptiveBannerAds အကြောင်း")
+
+## Fixed Banner Ads အတွက် လုပ်ဆောင်ရမည့်အချက်များ Code snippets များ   [ ဒီမှာဖတ်ပါ ](FixedBannerAds.md "FixedBannerAds အကြောင်း")
+
+## Interstital Ads အတွက် လုပ်ဆောင်ရမည့်အချက်များ Code snippets များ   [ ဒီမှာဖတ်ပါ ](InterstitalAds.md "InterstitalAds အကြောင်း")
+
+## Rewarded Ads အတွက် လုပ်ဆောင်ရမည့်အချက်များ Code snippets များ   [ ဒီမှာဖတ်ပါ ](RewardedAds.md "RewardAds အကြောင်း")
+
+## Rewarded Interstital Ads အတွက် လုပ်ဆောင်ရမည့်အချက်များ Code snippets များ   [ ဒီမှာဖတ်ပါ ](RewardedInterstitalAds.md "RewardedInterstitalAds အကြောင်း")
+
+## Native Ads အတွက် လုပ်ဆောင်ရမည့်အချက်များ Code snippets များ   [ ဒီမှာဖတ်ပါ ](NativeAds.md "NativeAds အကြောင်း")
+___
 
