@@ -4,12 +4,12 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.RequestConfiguration
 import com.google.android.gms.ads.appopen.AppOpenAd
 
 
@@ -24,6 +24,15 @@ class MyApp : Application(), Application.ActivityLifecycleCallbacks {
         registerActivityLifecycleCallbacks(this)
 
         appOpenAdManager = AppOpenAdManager()
+
+        // Test Ads for Debug Builds Only
+        if (BuildConfig.DEBUG) {
+            val testDeviceIds = listOf("YOUR_TEST_DEVICE_ID") // 🔴 Logcat မှာ "Ads" tag ကိုကြည့်ပြီး Device ID ယူနိုင်ပါတယ်
+            val config = RequestConfiguration.Builder()
+                .setTestDeviceIds(testDeviceIds)
+                .build()
+            MobileAds.setRequestConfiguration(config)
+        }
     }
 
     override fun onActivityStarted(activity: Activity) {

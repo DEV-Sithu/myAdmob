@@ -17,13 +17,33 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    // Build Variants (Dev/Prod)
+    flavorDimensions += "environment"
+    productFlavors {
+        create("dev") {
+            dimension = "environment"
+            resValue("string", "ad_app_id", "ca-app-pub-3940256099942544~3347511713") // Test App ID
+            resValue("string", "ad_banner_id", "ca-app-pub-3940256099942544/6300978111") // Test Banner
+        }
+
+        create("prod") {
+            dimension = "environment"
+            resValue("string", "ad_app_id", "YOUR_REAL_APP_ID") //  Production ID နဲ့အစားထိုးပါ
+            resValue("string", "ad_banner_id", "YOUR_REAL_BANNER_ID")
+        }
+    }
+
+
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        debug {
+            isDebuggable = true
         }
     }
     compileOptions {
@@ -35,7 +55,10 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
+
+
 }
 
 dependencies {

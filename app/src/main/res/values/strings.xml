@@ -4,15 +4,21 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 
+    <!--    Test-->
     <string name="admobId">ca-app-pub-3940256099942544~3347511713</string>
-
-
     <string name="banner_ads_home">ca-app-pub-3940256099942544/6300978111</string>
     <string name="banner_ads_dashboard">ca-app-pub-3940256099942544/6300978111</string>
     <string name="banner_ads_notification">ca-app-pub-3940256099942544/6300978111</string>
-
     <string name="open_ads">ca-app-pub-3940256099942544/9257395921</string>
     <string name="interstitial_ads">ca-app-pub-3940256099942544/1033173712</string>
 
+    <!-- Production-->
+    <!--    <string name="admobId">your production</string>-->
+    <!--    <string name="banner_ads_home">your production</string>-->
+    <!--    <string name="banner_ads_dashboard">your production</string>-->
+    <!--    <string name="banner_ads_notification">your production</string>-->
+    <!--    <string name="open_ads">your production</string>-->
+    <!--    <string name="interstitial_ads">your production</string>-->
 
-</resources>
+
+ </resources>
