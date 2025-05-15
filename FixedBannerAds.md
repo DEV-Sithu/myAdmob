@@ -153,4 +153,19 @@ class ExampleFragment : Fragment() {
 }
 ```
 
+**အရေးကြီးတဲ့အချက်များ:**
+
+1.  `YOUR_BANNER_AD_UNIT_ID` နေရာမှာ သင့်ရဲ့ Ad Unit ID ကို အစားထိုးပါ
+    
+2.  AdView ရဲ့ Lifecycle methods (resume, pause, destroy) တွေကို Fragment Lifecycle နဲ့ Sync လုပ်ပေးရပါမယ်
+    
+3.  `AdRequest` ကို မမေ့ပါနဲ့၊ ဒါမှ Ad ကို Load လုပ်မှာ
+    
+4.  AdMob သုံးဖို့ Manifest နဲ့ Gradle မှာ Config လုပ်ဖို့မမေ့ပါနဲ့
+    
+
+**သတိထားရမယ့်အချက်:** Fragment ကို XML မှာ AdView မထည့်ထားဘဲ Programmatic ထည့်ချင်ရင် `addView()` နဲ့ ထည့်ပြီး LayoutParams တွေ သေချာသတ်မှတ်ပေးဖို့လိုပါတယ်။
+
+
+
     
