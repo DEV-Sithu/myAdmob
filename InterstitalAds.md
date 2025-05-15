@@ -40,4 +40,58 @@ Interstitial ads ဆိုတာက မိုဘိုင်းအက်ပ်�
 
 Interstitial ads ကို မဟာဗျူဟာကျကျအသုံးပြုပါက အသုံးပြုသူအတွက်လည်း အဆင်ပြေ၊ ဖန်တီးသူအတွက်လည်း ဝင်ငွေကောင်းစေနိုင်ပါတယ်။
 
+```
+class MainActivity : AppCompatActivity() {
+    private var interstitialAd: InterstitialAd? = null
+    private val AD_UNIT_ID = "ca-app-pub-3940256099942544/1033173712" // Test ID
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        // AdMob ကို Initialize လုပ်ခြင်း
+        MobileAds.initialize(this) {}
+        
+        // Interstitial Ad ကို Load လုပ်ပါ
+        loadInterstitialAd()
+    }
+
+    private fun loadInterstitialAd() {
+        val adRequest = AdRequest.Builder().build()
+        InterstitialAd.load(
+            this,
+            AD_UNIT_ID,
+            adRequest,
+            object : InterstitialAdLoadCallback() {
+                override fun onAdLoaded(ad: InterstitialAd) {
+                    interstitialAd = ad
+                    Log.d("AdMob", "Ad loaded successfully")
+                    setupAdCallbacks() // Callback များကို ချိတ်ဆက်ပါ
+                }
+
+                override fun onAdFailedToLoad(error: LoadAdError) {
+                    interstitialAd = null
+                    Log.e("AdMob", "Ad failed to load: ${error.message}")
+                }
+            }
+        )
+    }
+}
+```
+### ** ကြော်ငြာပြသခြင်း**
+```
+fun showInterstitialAd() {
+    if (interstitialAd != null) {
+        interstitialAd?.show(this)
+    } else {
+        Log.d("AdMob", "Ad not loaded yet")
+        loadInterstitialAd() // Ad မရှိပါက ပြန်လည် Load လုပ်ပါ
+    }
+}
+```
+
+သင့်တော်သော အချိန် (ဥပမာ - ဂိမ်းအဆင့်ပြီးချိန်) တွင် `show()` ကို ခေါ်ပါ။
+
+
+
 
