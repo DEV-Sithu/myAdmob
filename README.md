@@ -73,6 +73,29 @@ ___
 ```
 ___
 
+#### app ကို release ထုတ်တဲ့အခါ ဖိုင်sizeနည်းအောင်ရယ် reverse engeerning လုပ်ရင်codeတွေမတွေ့အောင်   isMinifyEnabled = true လုပ်ရင် proguard ruleမှာဒီလိုလေးတွေရေးရမယ်
+```
+ buildTypes {
+        release {
+            isMinifyEnabled = true  // code
+            isShrinkResources  = true  // resource
+
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+```
+##### proguard ruleမှာရေးရမှာတွေက
+```
+-keep public class com.google.android.gms.ads.** { public *; }
+-keep public class com.google.ads.** { public *; }
+```
+
+___
+
+
 ##### Invalid Traffic ဆိုတာဘာလဲ အသေးစိတ်ဖတ်နိုင်ပါတယ်   [ ဒီမှာဖတ်ပါ ](InvalidTraffic.md "InvalidTraffic အကြောင်း")
 ___
 
