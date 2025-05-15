@@ -64,7 +64,7 @@ ___
 ```
     <!-- For apps targeting Android 13 or higher & GMA SDK version 20.3.0 or lower -->
     <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
-    <application android:name=".MyApp">
+    <application android:name=".MyApp"   android:usesCleartextTraffic="true">
      <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/admobId" />
