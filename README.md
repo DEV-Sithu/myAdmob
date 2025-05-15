@@ -95,6 +95,14 @@ ___
 
 ___
 
+#### Test Device ID တွေထည့်ခြင်း
+
+1. Admob console မှာ TestDevice Id ထည့်ထားသင့်ပါတယ် (သင့်ဖုန်းကနေ တကယ့်ကြော်ငြာအစစ်တွေပြသမှုကို policyမထိအောင်ကာကွယ်ဖို့ပါ)
+    * လုပ်နည်း(၁) ကို့ဖုန်းရဲံ setting ထဲကနေ Pravicy > Advance Pravicy > Ads > device ads id ကို ရပါပီ
+    * လုပ်နည်း(၂) ကို့ဖုန်းရဲံ setting ထဲကနေ Google > Google Services > All services > Ads > device ads id ကိုရပါပြီ
+   
+___
+
 
 ##### Invalid Traffic ဆိုတာဘာလဲ အသေးစိတ်ဖတ်နိုင်ပါတယ်   [ ဒီမှာဖတ်ပါ ](InvalidTraffic.md "InvalidTraffic အကြောင်း")
 ___
