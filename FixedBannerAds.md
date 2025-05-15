@@ -15,58 +15,22 @@ AdMob Fixed Banner Ads သည် အရွယ်အစားသတ်မှတ�
 
 ### 2\. **အသုံးပြုနိုင်သော စံအရွယ်အစားများ**
 
-AdMob တွင် အောက်ပါ Fixed Banner အရွယ်အစားများကို သတ်မှတ်ထားပါသည် 2 :
+AdMob တွင် အောက်ပါ Fixed Banner အရွယ်အစားများကို သတ်မှတ်ထားပါသည် 
 
-အရွယ်အစား (dp)
-
-ဖော်ပြချက်
-
-AdSize Constant
-
-320x50
-
-Banner
-
-`BANNER`
-
-320x100
-
-Large Banner
-
-`LARGE_BANNER`
-
-300x250
-
-IAB Medium Rectangle
-
-`MEDIUM_RECTANGLE`
-
-468x60
-
-IAB Full-Size Banner
-
-`FULL_BANNER` (တက်ဘလက်များအတွက်)
-
-728x90
-
-IAB Leaderboard
-
-`LEADERBOARD` (တက်ဘလက်များအတွက်)
+| အရွယ်အစား (dp) | ဖော်ပြချက် | AdSize Constant |
+| ------ | --- | ----- |
+| 320x50    | Banner   | 	BANNER    |
+| 320x100      | Large Banner   | LARGE_BANNER     |
+| 300x250    | IAB Medium Rectangle  | MEDIUM_RECTANGLE     |
+| 468x60     | IAB Full-Size Banner  | FULL_BANNER (တက်ဘလက်များအတွက်)     |
+| 728x90    | IAB Leaderboard  | LEADERBOARD (တက်ဘလက်များအတွက်)   |
 
 * * *
 
 ### 3\. **အသုံးပြုနည်း (Implementation)**
 
 #### (က) XML Layout တွင် တိုက်ရိုက်ထည့်သွင်းခြင်း
-
-xml
-
-Copy
-
-Download
-
-Run
-
+```
 <com.google.android.gms.ads.AdView
     xmlns:ads\="http://schemas.android.com/apk/res-auto"
     android:id\="@+id/banner\_ad\_view"
@@ -74,6 +38,7 @@ Run
     android:layout\_height\="wrap\_content"
     ads:adSize\="BANNER"
     ads:adUnitId\="ca-app-pub-3940256099942544/6300978111" />
+```
 
 -   **အရေးကြီးသော Attributes** :
     
@@ -84,18 +49,14 @@ Run
 
 #### (ခ) Programmatic နည်းဖြင့် ထည့်သွင်းခြင်း (Java/Kotlin)
 
-kotlin
-
-Copy
-
-Download
-
-val adView \= AdView(context)
-adView.adUnitId \= "AD\_UNIT\_ID"
+```
+val adView = AdView(context)
+adView.adUnitId = "AD_UNIT_ID"
 adView.setAdSize(AdSize.BANNER)
 adContainer.addView(adView)
-val adRequest \= AdRequest.Builder().build()
+val adRequest = AdRequest.Builder().build()
 adView.loadAd(adRequest)
+```
 
 * * *
 
@@ -123,6 +84,3 @@ adView.loadAd(adRequest)
     
 -   **Adaptive Banners** : စက်ပစ္စည်း၏ စခရင်အရွယ်နှင့် လိုက်လျောညီထွေ အရွယ်အစားကို အလိုအလျောက် ချိန်ညှိပေးသည် 3။
     
-
-အသေးစိတ်အချက်အလက်များကို [Google Developers Documentation](https://developers.google.com/admob/android/banner/fixed-size) တွင် ဖတ်ရှုနိုင်ပါသည်။
-
