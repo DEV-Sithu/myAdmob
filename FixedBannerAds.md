@@ -32,12 +32,12 @@ AdMob တွင် အောက်ပါ Fixed Banner အရွယ်အစာ�
 #### (က) XML Layout တွင် တိုက်ရိုက်ထည့်သွင်းခြင်း
 ```
 <com.google.android.gms.ads.AdView
-    xmlns:ads\="http://schemas.android.com/apk/res-auto"
-    android:id\="@+id/banner\_ad\_view"
-    android:layout\_width\="wrap\_content"
-    android:layout\_height\="wrap\_content"
-    ads:adSize\="BANNER"
-    ads:adUnitId\="ca-app-pub-3940256099942544/6300978111" />
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/banner_ad_view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    ads:adSize="BANNER"
+    ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
 ```
 
 -   **အရေးကြီးသော Attributes** :
