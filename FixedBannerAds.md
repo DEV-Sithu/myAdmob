@@ -82,5 +82,75 @@ adView.loadAd(adRequest)
 
 -   **Fixed Banners** : အရွယ်အစား မပြောင်းလဲပါ။ စခရင်အရွယ်နှင့် လိုက်လျောညီထွေ မရှိပါ။
     
--   **Adaptive Banners** : စက်ပစ္စည်း၏ စခရင်အရွယ်နှင့် လိုက်လျောညီထွေ အရွယ်အစားကို အလိုအလျောက် ချိန်ညှိပေးသည် 3။
+-   **Adaptive Banners** : စက်ပစ္စည်း၏ စခရင်အရွယ်နှင့် လိုက်လျောညီထွေ အရွယ်အစားကို အလိုအလျောက် ချိန်ညှိပေးသည်
+
+
+##### Fragment နဲ့ Banner Ad တွဲသုံးမယ်ဆိုရင် အောက်က ဥပမာအတိုင်း Lifecycle တွေကို သေချာ Handle လုပ်ပေးရပါမယ်။ 
+
+1. Fragment Layout XML ထဲမှာ AdView ကို ထည့်ပါ (fragment_ad_example.xml)
+ ```
+   <?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Your other views here -->
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        ads:adSize="BANNER"
+        ads:adUnitId="YOUR_BANNER_AD_UNIT_ID"/>
+
+</FrameLayout>
+```
+
+2. Fragment Class ထဲမှာ AdView ကို Initialize လုပ်ပါ
+```
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+
+class ExampleFragment : Fragment() {
+
+    private lateinit var adView: AdView
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_ad_example, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // AdView Initialize
+        adView = view.findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        adView.loadAd(adRequest)
+    }
+
+    // Lifecycle ကို ဂရုစိုက်ပါ
+    override fun onResume() {
+        super.onResume()
+        adView.resume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        adView.pause()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        adView.destroy()
+    }
+}
+```
+
     
