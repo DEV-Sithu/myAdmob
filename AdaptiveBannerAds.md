@@ -3,26 +3,8 @@
 # Inline Adaptive Banner
 
 ```
-package mm.myanmartvradio.com.ui.radio
 
-import android.annotation.SuppressLint
-import android.content.Context
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdSize
-import com.google.android.gms.ads.AdView
-import mm.myanmartvradio.com.R
-import mm.myanmartvradio.com.model.TVRadio
-
-class RadioAdapter(
+class CustomAdapter(
     private var items: List<Any>,
     private val context: Context, 
     private val listener: ItemClickListener
@@ -72,32 +54,13 @@ class RadioAdapter(
 
     inner class RadioViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val title: TextView = itemView.findViewById(R.id.tvTitle)
-        private val description: TextView = itemView.findViewById(R.id.tvMessage)
-        private val cover: ImageView = itemView.findViewById(R.id.ivCover)
-        private val itemLayout: LinearLayout = itemView.findViewById(R.id.itemlayout)
-        private val flagImg: ImageView = itemView.findViewById(R.id.flagImg)
-
         fun bindData(tvradioData: TVRadio) {
             title.text = tvradioData.name
-            description.text = tvradioData.description
-
             Glide.with(context)
                 .load(tvradioData.imageUrl)
                 .circleCrop()
                 .placeholder(R.drawable.placeholder)
                 .into(cover)
-
-            val flagResId = if (tvradioData.country == "my") {
-                R.drawable.myflag
-            } else {
-                R.drawable.thaiflag
-            }
-
-            Glide.with(context)
-                .load(flagResId)
-                .placeholder(R.drawable.myflag)
-                .into(flagImg)
-
             itemLayout.setOnClickListener {
                 listener.onItemClicked(tvradioData)
             }
