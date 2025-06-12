@@ -23,34 +23,52 @@ class CustomAdapter(
         }
     }
 
-    inner class AdViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+     inner class AdViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val adContainer: FrameLayout = itemView.findViewById(R.id.ad_container)
         private var adView: AdView? = null
 
         fun bindAd() {
             adContainer.removeAllViews()
             adView?.destroy()
-            
+
+            // Container width ကိုသေချာစစ်ပါ
+            val displayMetrics = context.resources.displayMetrics
+            val adWidthPixels = if (adContainer.width > 0) {
+                adContainer.width
+            } else {
+                displayMetrics.widthPixels - 32.dpToPx() // Padding အတွက်နေရာချန်ထား
+            }
+
             adView = AdView(context).apply {
                 adUnitId = context.getString(R.string.inline_banner_ads_radio)
-                
-                // Get adaptive ad size
+
+                // Adaptive ad size ကိုသေချာစစ်ပါ
                 val adSize = AdSize.getCurrentOrientationInlineAdaptiveBannerAdSize(
-                    context, 
-                    adContainer.width
+                    context,
+                    (adWidthPixels / displayMetrics.density).toInt()
                 )
                 setAdSize(adSize)
-                
+
+                // AdListener ထည့်ပါ
+                adListener = object : AdListener() {
+                    override fun onAdFailedToLoad(error: LoadAdError) {
+                        Log.e("AdError", "Ad failed: ${error.message}")
+                        // ပြဿနာရှာဖွေရန် error code ကိုကြည့်ပါ
+                    }
+                    override fun onAdLoaded() {
+                        Log.d("AdSuccess", "Ad loaded")
+                        adContainer.visibility = View.VISIBLE
+                    }
+                }
+
                 adContainer.addView(this)
                 loadAd(AdRequest.Builder().build())
             }
         }
-
-        fun clearAd() {
-            adView?.destroy()
-            adView = null
-        }
     }
+
+    // Extension function for dp to px conversion
+    fun Int.dpToPx(): Int = (this * Resources.getSystem().displayMetrics.density).toInt()
 
     inner class RadioViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val title: TextView = itemView.findViewById(R.id.tvTitle)
